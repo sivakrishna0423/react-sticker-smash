@@ -2,6 +2,7 @@ import * as imagepicker from 'expo-image-picker';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Button from '../components/Button';
 import CircleButton from '../components/CircleButton';
 import EmojiList from '../components/EmojiList';
@@ -49,6 +50,7 @@ const onSaveImageAsync = async () => {
 }
 
   return(
+    <GestureHandlerRootView style={styles.container}>
 <View style={styles.container}>
   <Text style={styles.text}>Home Screen</Text>
   <Link href="/about" style={styles.button}>
@@ -69,13 +71,14 @@ const onSaveImageAsync = async () => {
 ) : (
     <View style={styles.footerContainer}>
      <Button theme="primary" label="Choose  photo" onPress={pickImageAsync} />
-        <Button  label="Use this photo" onPress={()=> setShowAppOptions(true)} />
+        <Button theme="secondary" label="Use this photo" onPress={()=> setShowAppOptions(true)} />
      </View>
   )}
 <EmojiPicker visible={isModalVisible} onClose={onModalClose}>
   <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
   </EmojiPicker>
 </View>
+</GestureHandlerRootView>
 );
 }
 
@@ -106,6 +109,12 @@ const styles=StyleSheet.create({
     flex: 1 / 3,
     alignItems: 'center',
   },
+  footerContainer1: {
+  position: 'absolute',
+  bottom: 40,
+  alignItems: 'center',
+  width: '100%',
+},
     optionsContainer: {
     position: 'absolute',
     bottom: 80,
